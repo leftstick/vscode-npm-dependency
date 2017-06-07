@@ -5,7 +5,7 @@
 ![][rate-url]
 ![][license-url]
 
-Show git commit log for selected source code information in an individual view
+Update dependencies/devDependencies to latest version for specified package.json
 
 ![](https://raw.githubusercontent.com/leftstick/vscode-npm-dependency/master/images/npmDependency.gif)
 
