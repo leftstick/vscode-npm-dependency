@@ -31,6 +31,17 @@
   "license": "GPL-3.0",
   "main": "./out/src",
   "contributes": {
+    "configuration": {
+        "type": "object",
+        "title": "npm configuration",
+        "properties": {
+            "npm.registry": {
+                "type": "string",
+                "default": "https://registry.npmjs.org",
+                "description": "where npm will talk to for package information"
+            }
+        }
+    },
     "menus": {
       "editor/context": [
         {
