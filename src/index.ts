@@ -29,10 +29,9 @@ export function activate(context: vscode.ExtensionContext) {
 
             const hide = vscode.window.setStatusBarMessage('dependencies checking....');
 
-            const depends: Array<Pkg> = await readPkgs(pkg.dependencies);
-            const devDepends: Array<Pkg> = await readPkgs(pkg.devDependencies);
+            const depends: Array<Array<Pkg>> = await Promise.all([readPkgs(pkg.dependencies), readPkgs(pkg.devDependencies)]);
 
-            await writePkgs(vscode.window.activeTextEditor, depends.concat(devDepends));
+            await writePkgs(vscode.window.activeTextEditor, depends.reduce((p, c) => p.concat(c), []));
 
             hide.dispose();
 
