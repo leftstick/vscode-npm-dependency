@@ -13,6 +13,7 @@ export interface Package {
     name: string;
     version: string;
     description?: string;
+    'dist-tags'?: { [key: string]: string };
     homepage?: string;
     icon?: string;
     license?: string;

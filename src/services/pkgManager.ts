@@ -14,7 +14,7 @@ export function readPkgs(depends: Dependencies): Promise<Array<Pkg>> {
                 return {
                     name: p.name,
                     version: depends[p.name],
-                    latestVersion: p.version
+                    latestVersion: latestVersion(p, version(depends[p.name]))
                 };
             }));
         });
@@ -51,4 +51,14 @@ function isDependencyLine(line: string, pkgs: Array<Pkg>): Pkg {
 
 function version(raw: string): string {
     return raw.replace(/[~^<>=]/g, '');
+}
+
+function latestVersion(pkg: Package, fallback: string): string {
+    if (pkg.version) {
+        return pkg.version;
+    }
+    if (pkg['dist-tags'] && pkg['dist-tags'].latest) {
+        return pkg['dist-tags'].latest;
+    }
+    return fallback;
 }
