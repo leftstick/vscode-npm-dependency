@@ -1,0 +1,58 @@
+{
+  "name": "vscode-npm-dependency",
+  "displayName": "Npm Dependency",
+  "description": "Update dependencies/devDependencies for specific package.json",
+  "version": "1.0.0",
+  "publisher": "howardzuo",
+  "engines": {
+    "vscode": "^1.12.0"
+  },
+  "scripts": {
+    "vscode:prepublish": "tsc -p ./",
+    "compile": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "categories": [
+    "Debuggers"
+  ],
+  "icon": "images/npm.svg",
+  "bugs": {
+    "url": "https://github.com/leftstick/vscode-npm-dependency/issues",
+    "email": "leftstick@qq.com"
+  },
+  "homepage": "https://github.com/leftstick/vscode-npm-dependency/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leftstick/vscode-npm-dependency.git"
+  },
+  "activationEvents": [
+    "onCommand:extension.npmDepUpdateLatest"
+  ],
+  "license": "GPL-3.0",
+  "main": "./out/src",
+  "contributes": {
+    "menus": {
+      "editor/context": [
+        {
+          "command": "extension.npmDepUpdateLatest",
+          "group": "npm",
+          "when": "resourceFilename == package.json"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "extension.npmDepUpdateLatest",
+        "title": "Npm update (latest)"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^7.0.28",
+    "typescript": "^2.3.4",
+    "vscode": "^1.1.0"
+  },
+  "dependencies": {
+    "get-pkgs": "^0.6.0"
+  }
+}
