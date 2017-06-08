@@ -26,8 +26,10 @@ export function activate(context: vscode.ExtensionContext) {
         }
 
         const doc = vscode.window.activeTextEditor.document;
+        const diagnosticCollection = vscode.languages.createDiagnosticCollection('npm-dependency');
 
         const hide = vscode.window.setStatusBarMessage('dependencies checking....');
+        diagnosticCollection.clear();
 
         try {
             const pkg: Package = JSON.parse(doc.getText());
@@ -43,7 +45,6 @@ export function activate(context: vscode.ExtensionContext) {
             if (!err.moduleName) {
                 return vscode.window.showErrorMessage(err.message + '. Please check if your registry is accessible');
             }
-            const diagnosticCollection = vscode.languages.createDiagnosticCollection();
             const diagnostic = new vscode.Diagnostic(findRange(err.moduleName, err.version, doc), err.message, vscode.DiagnosticSeverity.Error);
             diagnosticCollection.set(doc.uri, [diagnostic]);
 
