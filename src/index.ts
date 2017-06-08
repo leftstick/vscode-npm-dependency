@@ -40,6 +40,9 @@ export function activate(context: vscode.ExtensionContext) {
 
         } catch (error) {
             const err: UpdateError = <UpdateError>error;
+            if (!err.moduleName) {
+                return vscode.window.showErrorMessage(err.message + '. Please check if your registry is accessible');
+            }
             const diagnosticCollection = vscode.languages.createDiagnosticCollection();
             const diagnostic = new vscode.Diagnostic(findRange(err.moduleName, err.version, doc), err.message, vscode.DiagnosticSeverity.Error);
             diagnosticCollection.set(doc.uri, [diagnostic]);

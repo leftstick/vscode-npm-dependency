@@ -12,6 +12,9 @@ export function fetchPkg(name: string, version: string): Promise<Package> {
             .get(url)
             .then(response => resolve(response.data))
             .catch((err: AxiosError) => {
+                if (!err.response) {
+                    return reject(new Error(err.message));
+                }
                 if (err.response.status === 404) {
                     return reject(new UpdateError(name, version, `module was not found, please check if the package name is valid or maybe you want to change a registry`));
                 }
