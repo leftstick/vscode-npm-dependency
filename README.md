@@ -17,6 +17,18 @@ Launch VS Code Quick Open (`cmd`/`ctrl` + `p`), paste the following command, and
 ext install npm-dependency
 ```
 
+## Configuration
+
+Possible to change default registry, because sometimes you may have your own registry deployment.
+
+```javascript
+{
+    "npm.registry": "https://registry.npmjs.org/"
+}
+```
+
+
+
 ## LICENSE ##
 
 [GPL v3 License](https://raw.githubusercontent.com/leftstick/vscode-npm-dependency/master/LICENSE)

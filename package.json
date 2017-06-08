@@ -2,7 +2,7 @@
   "name": "vscode-npm-dependency",
   "displayName": "Npm Dependency",
   "description": "Update dependencies/devDependencies for specific package.json",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "publisher": "howardzuo",
   "engines": {
     "vscode": "^1.12.0"
@@ -32,15 +32,15 @@
   "main": "./out/src",
   "contributes": {
     "configuration": {
-        "type": "object",
-        "title": "npm configuration",
-        "properties": {
-            "npm.registry": {
-                "type": "string",
-                "default": "https://registry.npmjs.org",
-                "description": "where npm will talk to for package information"
-            }
+      "type": "object",
+      "title": "npm configuration",
+      "properties": {
+        "npm.registry": {
+          "type": "string",
+          "default": "https://registry.npmjs.org",
+          "description": "where npm will talk to for package information"
         }
+      }
     },
     "menus": {
       "editor/context": [
@@ -59,11 +59,11 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "^7.0.28",
+    "@types/node": "^7.0.29",
     "typescript": "^2.3.4",
     "vscode": "^1.1.0"
   },
   "dependencies": {
-    "get-pkgs": "^0.6.0"
+    "axios": "^0.16.2"
   }
 }

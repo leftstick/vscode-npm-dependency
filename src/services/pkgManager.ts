@@ -1,24 +1,18 @@
 import * as vscode from 'vscode';
-import * as getPkgs from 'get-pkgs';
+import { fetchPkgs } from './versionResolver';
 
 import { Dependencies, Pkg, Package } from '../models';
 
 export function readPkgs(depends: Dependencies): Promise<Array<Pkg>> {
 
-    return new Promise((resolve, reject) => {
-        getPkgs(Object.keys(depends).filter(d => /\d+\.\d+\.\d+/.test(depends[d])), (err, pkgs: Array<Package>) => {
-            if (err) {
-                return reject(err);
-            }
-            resolve(pkgs.map(p => {
-                return {
-                    name: p.name,
-                    version: depends[p.name],
-                    latestVersion: latestVersion(p, version(depends[p.name]))
-                };
+    return fetchPkgs(depends)
+        .then(data => {
+            return data.map(d => ({
+                name: d.name,
+                version: depends[d.name],
+                latestVersion: latestVersion(d, version(depends[d.name]))
             }));
         });
-    });
 }
 
 export function writePkgs(raw: vscode.TextEditor, pkgs: Array<Pkg>): Thenable<boolean> {

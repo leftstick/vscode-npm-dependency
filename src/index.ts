@@ -6,6 +6,7 @@ import * as path from 'path';
 import { readPkgs, writePkgs } from './services/pkgManager';
 
 import { Pkg, Package } from './models';
+import { UpdateError } from './error';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -24,29 +25,45 @@ export function activate(context: vscode.ExtensionContext) {
             return;
         }
 
-        try {
-            const pkg: Package = JSON.parse(vscode.window.activeTextEditor.document.getText());
+        const doc = vscode.window.activeTextEditor.document;
 
-            const hide = vscode.window.setStatusBarMessage('dependencies checking....');
+        const hide = vscode.window.setStatusBarMessage('dependencies checking....');
+
+        try {
+            const pkg: Package = JSON.parse(doc.getText());
 
             const depends: Array<Array<Pkg>> = await Promise.all([readPkgs(pkg.dependencies), readPkgs(pkg.devDependencies)]);
 
             await writePkgs(vscode.window.activeTextEditor, depends.reduce((p, c) => p.concat(c), []));
 
-            hide.dispose();
-
             vscode.window.setStatusBarMessage('pakcage.json updated', 3000);
 
         } catch (error) {
-            vscode.window.showErrorMessage('your package.json is invalid');
+            const err: UpdateError = <UpdateError>error;
+            const diagnosticCollection = vscode.languages.createDiagnosticCollection();
+            const diagnostic = new vscode.Diagnostic(findRange(err.moduleName, err.version, doc), err.message, vscode.DiagnosticSeverity.Error);
+            diagnosticCollection.set(doc.uri, [diagnostic]);
+
+            vscode.window.setStatusBarMessage('pakcage.json update failed', 4500);
+        } finally {
+            hide.dispose();
         }
-
-
 
     });
 
     context.subscriptions.push(disposable);
 
+}
+
+function findRange(name: string, version: string, doc: vscode.TextDocument): vscode.Range {
+    const LINE_BREAK = doc.eol === vscode.EndOfLine.LF ? '\n' : '\r\n';
+    const lines: Array<string> = doc.getText().split(LINE_BREAK);
+
+    const foundLine: number = lines.findIndex(line => line.includes(`"${name}"`) && line.includes(`${version}`));
+    const foundColumn: number = lines[foundLine].indexOf(name);
+
+    return new vscode.Range(foundLine, foundColumn,
+        foundLine, foundColumn + name.length);
 }
 
 // this method is called when your extension is deactivated
