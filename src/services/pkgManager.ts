@@ -5,6 +5,10 @@ import { Dependencies, Pkg, Package } from '../models';
 
 export function readPkgs(depends: Dependencies): Promise<Array<Pkg>> {
 
+    if (!depends) {
+        return Promise.resolve([]);
+    }
+
     return fetchPkgs(depends)
         .then(data => {
             return data.map(d => ({
