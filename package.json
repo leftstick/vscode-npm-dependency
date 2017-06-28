@@ -2,7 +2,7 @@
   "name": "vscode-npm-dependency",
   "displayName": "Npm Dependency",
   "description": "Update dependencies/devDependencies for specific package.json",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "publisher": "howardzuo",
   "engines": {
     "vscode": "^1.12.0"
@@ -15,7 +15,7 @@
   "categories": [
     "Debuggers"
   ],
-  "icon": "images/npm.svg",
+  "icon": "images/npm.png",
   "bugs": {
     "url": "https://github.com/leftstick/vscode-npm-dependency/issues",
     "email": "leftstick@qq.com"
@@ -59,9 +59,9 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "^7.0.31",
-    "typescript": "^2.3.4",
-    "vscode": "^1.1.0"
+    "@types/node": "^8.0.4",
+    "typescript": "^2.4.1",
+    "vscode": "^1.1.1"
   },
   "dependencies": {
     "axios": "^0.16.2"
