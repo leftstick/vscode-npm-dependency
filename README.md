@@ -35,7 +35,7 @@ Possible to change default registry, because sometimes you may have your own reg
 
 
 [vs-url]: https://marketplace.visualstudio.com/items?itemName=howardzuo.vscode-npm-dependency
-[vs-image]: http://vsmarketplacebadge.apphb.com/version/howardzuo.vscode-npm-dependency.svg
-[install-url]: http://vsmarketplacebadge.apphb.com/installs/howardzuo.vscode-npm-dependency.svg
-[rate-url]: http://vsmarketplacebadge.apphb.com/rating/howardzuo.vscode-npm-dependency.svg
+[vs-image]: https://vsmarketplacebadge.apphb.com/version/howardzuo.vscode-npm-dependency.svg
+[install-url]: https://vsmarketplacebadge.apphb.com/installs/howardzuo.vscode-npm-dependency.svg
+[rate-url]: https://vsmarketplacebadge.apphb.com/rating/howardzuo.vscode-npm-dependency.svg
 [license-url]: https://img.shields.io/github/license/leftstick/vscode-npm-dependency.svg
