@@ -2,10 +2,10 @@
   "name": "vscode-npm-dependency",
   "displayName": "Npm Dependency",
   "description": "Update dependencies/devDependencies for specific package.json",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "publisher": "howardzuo",
   "engines": {
-    "vscode": "^1.12.0"
+    "vscode": "^1.20.1"
   },
   "scripts": {
     "vscode:prepublish": "tsc -p ./",
@@ -39,6 +39,15 @@
           "type": "string",
           "default": "https://registry.npmjs.org",
           "description": "where npm will talk to for package information"
+        },
+        "npm.updateStrategy": {
+          "type": "string",
+          "enum": [
+            "LATEST",
+            "SEMVER"
+          ],
+          "default": "LATEST",
+          "description": "what strategy you want to use to update your package.json"
         }
       }
     },
@@ -59,11 +68,12 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "^8.0.4",
-    "typescript": "^2.4.1",
-    "vscode": "^1.1.1"
+    "@types/node": "^9.4.6",
+    "typescript": "^2.7.2",
+    "vscode": "^1.1.10"
   },
   "dependencies": {
-    "axios": "^0.16.2"
+    "axios": "^0.18.0",
+    "semver": "^5.5.0"
   }
 }
