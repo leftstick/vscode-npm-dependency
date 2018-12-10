@@ -2,7 +2,7 @@
   "name": "vscode-npm-dependency",
   "displayName": "Npm Dependency",
   "description": "Update dependencies/devDependencies for specific package.json",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "publisher": "howardzuo",
   "engines": {
     "vscode": "^1.20.1"
@@ -68,12 +68,13 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "^9.4.6",
-    "typescript": "^2.7.2",
+    "@types/node": "^10.12.12",
+    "typescript": "^3.2.2",
     "vscode": "^1.1.10"
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "semver": "^5.5.0"
+    "semver": "^5.6.0",
+    "url-parse": "^1.4.4"
   }
 }

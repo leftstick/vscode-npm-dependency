@@ -1,17 +1,19 @@
-import axios, { AxiosPromise, AxiosError } from 'axios'
+import axios, { AxiosPromise, AxiosError, AxiosRequestConfig } from 'axios'
 import * as vscode from 'vscode'
 import * as semver from 'semver'
 
 import { Package, Dependencies } from '../models'
-import { isLatest, isScoped, getRegistry, isValidVersion } from '../helper/util'
+import { isLatest, isScoped, getRegistry, getProxyForAxios, isValidVersion } from '../helper/util'
 import { UpdateError } from '../error'
 
 export function fetchPkg(name: string, version: string): Promise<Package> {
   const url = getInfoAddress(name)
 
+  const axiosConfig = getProxyForAxios() ? { proxy: getProxyForAxios() } : undefined
+
   return new Promise<Package>((resolve, reject) => {
     axios
-      .get(url)
+      .get(url, axiosConfig as AxiosRequestConfig)
       .then(response => resolve(response.data))
       .catch((err: AxiosError) => {
         if (!err.response) {
