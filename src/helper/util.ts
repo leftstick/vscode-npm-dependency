@@ -39,7 +39,7 @@ export function getProxyForAxios(): axiosConfigProxy | undefined {
     host: res.hostname
   }
   if (res.port) {
-    param.port = res.port
+    param.port = +res.port
   }
   if (res.username) {
     param.username = res.username

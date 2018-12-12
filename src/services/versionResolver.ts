@@ -1,4 +1,4 @@
-import axios, { AxiosPromise, AxiosError, AxiosRequestConfig } from 'axios'
+import axios, { AxiosPromise, AxiosError, AxiosRequestConfig } from 'axios-https-proxy-fix'
 import * as vscode from 'vscode'
 import * as semver from 'semver'
 
