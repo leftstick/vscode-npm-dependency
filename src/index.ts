@@ -38,7 +38,7 @@ export function activate(context: vscode.ExtensionContext) {
 
             await writePkgs(vscode.window.activeTextEditor, depends.reduce((p, c) => p.concat(c), []));
 
-            vscode.window.setStatusBarMessage('pakcage.json updated', 3000);
+            vscode.window.setStatusBarMessage('package.json updated', 3000);
 
         } catch (error) {
             const err: UpdateError = <UpdateError>error;
@@ -48,7 +48,7 @@ export function activate(context: vscode.ExtensionContext) {
             const diagnostic = new vscode.Diagnostic(findRange(err.moduleName, err.version, doc), err.message, vscode.DiagnosticSeverity.Error);
             diagnosticCollection.set(doc.uri, [diagnostic]);
 
-            vscode.window.setStatusBarMessage('pakcage.json update failed', 4500);
+            vscode.window.setStatusBarMessage('package.json update failed', 4500);
         } finally {
             hide.dispose();
         }
